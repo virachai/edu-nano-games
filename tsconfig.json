@@ -1,0 +1,9 @@
+{
+  "files": [],
+  "references": [
+    { "path": "games/01-vocab-match/tsconfig.json" },
+    { "path": "games/02-math-guardian/tsconfig.json" },
+    { "path": "games/03-chemistry-quiz/tsconfig.json" },
+    { "path": "shared/tsconfig.json" }
+  ]
+}
