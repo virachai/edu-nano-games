@@ -10,7 +10,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Target architecture (build toward this)
 
-```
+```textplain
 index.html            # game hub
 games/01-vocab-match/  02-math-guardian/  03-chemistry-quiz/
   index.html, style.css, game.js, data/*.js   # content data separate from game logic
