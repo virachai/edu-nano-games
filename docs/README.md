@@ -2,7 +2,24 @@
 
 Welcome to the **nano-games** documentation repository. This structure is governed by strict naming conventions and modular separation of concerns to ensure maintainability, scalability, and production readiness.
 
+For the product vision, see `docs/01-product-vision/`. For the master implementation plan, see `docs/10-development-plan/10-01-development-plan.md`.
+
 ---
+
+## 🎯 Project Posture
+
+This project aims for a **lean, enterprise-grade** posture without adding runtime bloat to the games themselves:
+
+- **Lean:** small repo, no build step for the games, no runtime dependencies, fast local setup.
+- **Enterprise-grade:** repeatable workflows, traceable decisions, automated checks, and clear privacy/accessibility/security expectations.
+
+That means the games stay minimal, while the project around them gets enough structure to be trusted, reviewed, deployed, and handed off.
+
+---
+
+## 🏷️ File Naming Convention (`NN-{aa-bb-cc}.md`)
+
+
 
 ## 📂 Directory Structure & Responsibilities
 
@@ -18,6 +35,7 @@ Welcome to the **nano-games** documentation repository. This structure is govern
 | `08-analysis-gap/`        | Gap analysis between the documented vision and the current repository state.                                     |
 | `09-runbook/`             | Operational runbooks for building, releasing, and deploying the games.                                           |
 | `10-development-plan/`    | The master development plan: architecture decisions, phased roadmap, and cross-cutting requirements.             |
+| `package.json` + `pnpm-lock.yaml` | Dev-only toolchain (TypeScript, ESLint, Prettier, Husky, lint-staged). Games themselves stay zero runtime dependencies. |
 
 ---
 

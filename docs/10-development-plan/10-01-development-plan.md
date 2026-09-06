@@ -74,8 +74,8 @@ export const sets = [
     id: "animals-easy",
     gradeBand: "early-elementary",
     pairs: [
-      { word: "cat", image: "cat.svg", thai: "แมว" },
-      { word: "dog", image: "dog.svg", thai: "หมา" },
+      { word: "cat", image: "cat.svg", translation: "cat" },
+      { word: "dog", image: "dog.svg", translation: "dog" },
     ],
   },
 ];
@@ -148,10 +148,10 @@ export const questions = [
 
 ## 4. Content & Curriculum Plan
 
-- **Game 1:** start with English/basic-science word sets (animals, colors, classroom objects) with Thai translations; grade bands early → upper elementary.
+- **Game 1:** start with English/basic-science word sets (animals, colors, classroom objects) with language translations; grade bands early → upper elementary.
 - **Game 2:** arithmetic only (+, −, ×, ÷) with operand limits per band; later: simple equations to match the README description.
 - **Game 3:** periodic table essentials (symbols, uses, groups), then simple reactions; scenario-based framing per README.
-- Content must be reviewed against Thai curriculum levels before release — see `08-analysis-gap` risk C.
+- Content must be reviewed against curriculum levels before release — see `08-analysis-gap` risk C.
 
 ---
 
@@ -187,7 +187,7 @@ export const questions = [
 
 | Risk                                    | Mitigation                                                                                    |
 | :-------------------------------------- | :-------------------------------------------------------------------------------------------- |
-| Content not aligned with Thai curricula | Version content as data; review word/question banks with teachers before release.             |
+| Content not aligned with curricula | Version content as data; review word/question banks with teachers before release.             |
 | Age-appropriateness / frustration       | Per-game difficulty bands, streaks over harsh penalties, encouraging game-over screens.       |
 | Cross-device inconsistency              | Responsive shell, 44 px touch targets, keyboard + touch input everywhere.                     |
 | Accessibility gaps                      | Keyboard-first development from Phase 1, WCAG 2.2 AA audit in Phase 4, not retrofitted later. |
@@ -220,10 +220,14 @@ Deep-research outcomes for two recurring questions: (a) should the repo adopt Tu
 
 ### 8.2 GitHub Pages: static build via GitHub Actions
 
+
+
 GitHub Pages supports two publishing modes (GitHub docs):
 
 1. **Deploy from a branch** — pick a branch + folder (`/` or `/docs`) with zero config, auto-published on push. Not suitable here: `/docs` is project documentation, not the site, and branch mode cannot run a build or tests.
-2. **GitHub Actions workflow** — recommended when any build/control is needed. Canonical pattern (verified working example):
+2. **GitHub Actions workflow** — recommended when any build/control is needed. Current canonical pattern for this repo lives in `.github/workflows/ci.yml` and combines check, build, and deploy jobs.
+
+
 
 ```yaml
 name: Deploy site
