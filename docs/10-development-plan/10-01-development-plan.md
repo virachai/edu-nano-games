@@ -8,18 +8,18 @@ The master plan for turning the documented vision (`README.md`, `docs/`) into a 
 
 ## 1. Research Summary & Key Decisions
 
-| Topic                     | Decision                                                                                                                                            | Rationale                                                                                                                            |
-| :------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------- |
-| **Engine**                | Vanilla JavaScript (ES6+ modules), zero dependencies                                                                                                | Matches `README.md` tech stack; instant load on older school hardware; nothing to license or maintain.                               |
-| **Rendering**             | DOM/HTML for Games 1 & 3 (cards, quiz); **Canvas 2D** for Game 2 (arcade action)                                                                    | DOM is screen-reader friendly and responsive-friendly; Canvas is justified only where sprites move fast (Game 2).                    |
-| **Accessibility**         | Target WCAG 2.2 AA: full keyboard operation, visible focus, contrast ≥ 4.5:1, pausable gameplay, `prefers-reduced-motion` support                     | Schools increasingly require WCAG-compliant ed-tech; keyboard-only play also helps touch/switch users.                               |
-| **Privacy (COPPA)**       | **Zero data collection.** No accounts, no analytics, no third-party requests. Scores persist only in `localStorage`                                   | Audience includes children under 13; COPPA requires parental consent for any personal info collection — collecting nothing avoids this entirely. |
-| **Learning design**       | Immediate feedback, retrieval practice, spaced repetition of missed items, difficulty progression                                                      | 2024 meta-analysis: spaced repetition + retrieval practice improves outcomes ~25% vs. either alone; instant feedback reinforces correct behavior. |
-| **Content as data**       | Word lists / question banks / difficulty bands live in plain JS data modules, separate from game logic                                               | Teachers can review and update curriculum content without touching game code; enables future curriculum variants.                     |
-| **Audio**                 | Web Audio API for synthesized SFX + a global mute toggle                                                                                            | No licensed assets; tiny footprint; audio feedback supports learning and engagement.                                                 |
-| **Testing**               | Node built-in test runner (`node --test`) against **pure logic modules** (no DOM)                                                                   | Zero-dependency testing — game logic (matching, scoring, generators, validation) is testable without a browser or framework.         |
-| **Hosting**               | GitHub Pages for v1, deployed via GitHub Actions (see § 8); Netlify later for a custom domain / previews                                         | GitHub Pages ships from this repo for free with HTTPS; Actions deploy avoids a `gh-pages` branch and runs tests first.                |
-| **3D (Three.js)**         | Deferred until a game actually needs 3D                                                                                                              | Keep the initial release dependency-free; revisit per `README.md` optional tech.                                                      |
+| Topic               | Decision                                                                                                                          | Rationale                                                                                                                                         |
+| :------------------ | :-------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Engine**          | Vanilla JavaScript (ES6+ modules), zero dependencies                                                                              | Matches `README.md` tech stack; instant load on older school hardware; nothing to license or maintain.                                            |
+| **Rendering**       | DOM/HTML for Games 1 & 3 (cards, quiz); **Canvas 2D** for Game 2 (arcade action)                                                  | DOM is screen-reader friendly and responsive-friendly; Canvas is justified only where sprites move fast (Game 2).                                 |
+| **Accessibility**   | Target WCAG 2.2 AA: full keyboard operation, visible focus, contrast ≥ 4.5:1, pausable gameplay, `prefers-reduced-motion` support | Schools increasingly require WCAG-compliant ed-tech; keyboard-only play also helps touch/switch users.                                            |
+| **Privacy (COPPA)** | **Zero data collection.** No accounts, no analytics, no third-party requests. Scores persist only in `localStorage`               | Audience includes children under 13; COPPA requires parental consent for any personal info collection — collecting nothing avoids this entirely.  |
+| **Learning design** | Immediate feedback, retrieval practice, spaced repetition of missed items, difficulty progression                                 | 2024 meta-analysis: spaced repetition + retrieval practice improves outcomes ~25% vs. either alone; instant feedback reinforces correct behavior. |
+| **Content as data** | Word lists / question banks / difficulty bands live in plain JS data modules, separate from game logic                            | Teachers can review and update curriculum content without touching game code; enables future curriculum variants.                                 |
+| **Audio**           | Web Audio API for synthesized SFX + a global mute toggle                                                                          | No licensed assets; tiny footprint; audio feedback supports learning and engagement.                                                              |
+| **Testing**         | Node built-in test runner (`node --test`) against **pure logic modules** (no DOM)                                                 | Zero-dependency testing — game logic (matching, scoring, generators, validation) is testable without a browser or framework.                      |
+| **Hosting**         | GitHub Pages for v1, deployed via GitHub Actions (see § 8); Netlify later for a custom domain / previews                          | GitHub Pages ships from this repo for free with HTTPS; Actions deploy avoids a `gh-pages` branch and runs tests first.                            |
+| **3D (Three.js)**   | Deferred until a game actually needs 3D                                                                                           | Keep the initial release dependency-free; revisit per `README.md` optional tech.                                                                  |
 
 ---
 
@@ -75,19 +75,30 @@ export const sets = [
     gradeBand: "early-elementary",
     pairs: [
       { word: "cat", image: "cat.svg", thai: "แมว" },
-      { word: "dog", image: "dog.svg", thai: "หมา" }
-    ]
-  }
+      { word: "dog", image: "dog.svg", thai: "หมา" },
+    ],
+  },
 ];
 
 // games/02-math-guardian/data/levels.js
 export const levels = [
-  { band: "upper-elementary", operators: ["+", "-"], maxOperand: 20, meteorCount: 4, speed: 1.0 }
+  {
+    band: "upper-elementary",
+    operators: ["+", "-"],
+    maxOperand: 20,
+    meteorCount: 4,
+    speed: 1.0,
+  },
 ];
 
 // games/03-chemistry-quiz/data/questions.js
 export const questions = [
-  { scenario: "Which element is essential for breathing?", answer: "Oxygen", distractors: ["Nitrogen", "Helium"], explanation: "..." }
+  {
+    scenario: "Which element is essential for breathing?",
+    answer: "Oxygen",
+    distractors: ["Nitrogen", "Helium"],
+    explanation: "...",
+  },
 ];
 ```
 
@@ -96,12 +107,14 @@ export const questions = [
 ## 3. Phased Roadmap
 
 ### Phase 0 — Foundation (v1.0.0)
+
 - [ ] Scaffold repository layout (hub page, `shared/`, `games/`, `tests/`, CI workflow).
 - [ ] Build the shared game shell: state machine, HUD, game-over flow, design tokens.
 - [ ] Deploy stub site to GitHub Pages; verify HTTPS and mobile rendering.
 - **Definition of done:** hub page loads, shell runs a dummy game end-to-end, `node --test` passes, site is live on HTTPS.
 
 ### Phase 1 — Game 1: Vocabulary Matching (v1.1.0)
+
 - [ ] Card-flip mechanic (DOM): flip two cards, match word↔image, immediate feedback.
 - [ ] Content: 3 word sets (early elementary English/basic science) in `data/words.js`.
 - [ ] Scoring + streaks; missed pairs reappear later in the round (retrieval practice).
@@ -109,6 +122,7 @@ export const questions = [
 - **DoD:** playable on touch and keyboard; logic covered by `tests/vocab-match.test.js`; content editable without touching logic.
 
 ### Phase 2 — Game 2: Math Guardian Spaceship (v1.2.0)
+
 - [ ] Canvas 2D render loop (requestAnimationFrame, delta-time) and input (keyboard + pointer).
 - [ ] Answer generator + meteor targets; correct answers score, wrong answers cost a life.
 - [ ] Difficulty bands per grade (upper elementary → middle school) via `data/levels.js`.
@@ -116,12 +130,14 @@ export const questions = [
 - **DoD:** playable on desktop and touch; generator/scoring covered by tests; runs smoothly on low-end hardware (no frame-rate assumptions).
 
 ### Phase 3 — Game 3: Chemistry Quiz Adventure (v1.3.0)
+
 - [ ] Quiz engine (DOM): scenario → question → answer → explanation feedback loop.
 - [ ] Question bank for middle/high school (periodic table, elements, reactions) in `data/questions.js`.
 - [ ] Level progression through simulated scenarios; wrong answers explained and retried.
 - **DoD:** full bank playable; selection/scoring covered by tests; explanations shown on every answer.
 
 ### Phase 4 — Polish & Scale (v1.4.0+)
+
 - [ ] WCAG 2.2 AA audit (keyboard walkthrough, contrast check, screen-reader pass).
 - [ ] Lighthouse performance/a11y pass (target: a11y ≥ 95, fast-load budget ≤ 200 KB total JS per game).
 - [ ] Teacher-facing extras: printable word lists, class-friendly "no scores saved" mode.
@@ -142,6 +158,7 @@ export const questions = [
 ## 5. Cross-Cutting Requirements (apply to every game)
 
 ### Accessibility (WCAG 2.2 AA)
+
 - Full keyboard operation; visible focus indicator; logical tab order; Esc/P pauses.
 - ARIA live regions announce score changes and match results; alt text for images.
 - Contrast ≥ 4.5:1 for text; no information conveyed by color alone.
@@ -149,15 +166,18 @@ export const questions = [
 - Touch targets ≥ 44 px.
 
 ### Privacy (COPPA-aligned)
+
 - No accounts, no forms, no third-party scripts, no analytics, no cookies.
 - Scores/state in `localStorage` only; "no data saved" mode for classrooms.
 - Verify in DevTools Network tab: zero outbound requests beyond the site itself.
 
 ### Performance
+
 - Zero build step; ES modules loaded per game; total JS per game ≤ 200 KB.
 - Assets (images/sprites) as small SVGs or compressed PNGs; no framework payloads.
 
 ### Consistency
+
 - All games share `shared/styles.css` tokens, shell flow, and audio for a uniform feel.
 - All content in `data/` modules; game logic stays UI-independent and testable.
 
@@ -165,13 +185,13 @@ export const questions = [
 
 ## 6. Risks & Mitigations
 
-| Risk                                | Mitigation                                                                                       |
-| :---------------------------------- | :----------------------------------------------------------------------------------------------- |
-| Content not aligned with Thai curricula | Version content as data; review word/question banks with teachers before release.                |
-| Age-appropriateness / frustration   | Per-game difficulty bands, streaks over harsh penalties, encouraging game-over screens.          |
-| Cross-device inconsistency          | Responsive shell, 44 px touch targets, keyboard + touch input everywhere.                        |
-| Accessibility gaps                  | Keyboard-first development from Phase 1, WCAG 2.2 AA audit in Phase 4, not retrofitted later.     |
-| Scope creep (leaderboards, accounts)| Deferred to Phase 4+ and only via privacy-safe opt-in; core = the three games, done well.         |
+| Risk                                    | Mitigation                                                                                    |
+| :-------------------------------------- | :-------------------------------------------------------------------------------------------- |
+| Content not aligned with Thai curricula | Version content as data; review word/question banks with teachers before release.             |
+| Age-appropriateness / frustration       | Per-game difficulty bands, streaks over harsh penalties, encouraging game-over screens.       |
+| Cross-device inconsistency              | Responsive shell, 44 px touch targets, keyboard + touch input everywhere.                     |
+| Accessibility gaps                      | Keyboard-first development from Phase 1, WCAG 2.2 AA audit in Phase 4, not retrofitted later. |
+| Scope creep (leaderboards, accounts)    | Deferred to Phase 4+ and only via privacy-safe opt-in; core = the three games, done well.     |
 
 ---
 
@@ -220,7 +240,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: node --test          # run tests before shipping
+      - run: node --test # run tests before shipping
       - run: mkdir -p _site && cp -r index.html games shared _site && touch _site/.nojekyll
       - uses: actions/upload-pages-artifact@v3
   deploy:

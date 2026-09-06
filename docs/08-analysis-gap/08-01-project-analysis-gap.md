@@ -12,13 +12,13 @@ This report outlines the **documentation-code gap**, real-world execution challe
 
 ## 1. Current State vs. Vision (The Documentation-Code Gap)
 
-| Domain                    | Documentation / Spec State                          | Current Repository Reality      | Gap / Missing Pieces                                                      |
-| :------------------------ | :-------------------------------------------------- | :------------------------------ | :------------------------------------------------------------------------ |
-| **Game 1: Vocabulary**    | Card-flipping matching game (English / basic science) | Described in `README.md`      | No game files exist yet (HTML/CSS/JS).                                     |
-| **Game 2: Math**          | Spaceship arcade game with answer-shooting mechanic | Described in `README.md`        | No game files exist yet (HTML/CSS/JS).                                     |
-| **Game 3: Chemistry**     | Quiz adventure with simulated scenarios             | Described in `README.md`        | No game files exist yet (HTML/CSS/JS).                                     |
-| **Shared game shell**     | Common start/HUD/game-over flow for all games       | Implied in `README.md` tech stack | No shared shell, styling, or asset structure defined.                    |
-| **Hosting & distribution** | Static web hosting, no install required             | Not specified in `README.md`    | No hosting target, build, or release process defined.                      |
+| Domain                     | Documentation / Spec State                            | Current Repository Reality        | Gap / Missing Pieces                                  |
+| :------------------------- | :---------------------------------------------------- | :-------------------------------- | :---------------------------------------------------- |
+| **Game 1: Vocabulary**     | Card-flipping matching game (English / basic science) | Described in `README.md`          | No game files exist yet (HTML/CSS/JS).                |
+| **Game 2: Math**           | Spaceship arcade game with answer-shooting mechanic   | Described in `README.md`          | No game files exist yet (HTML/CSS/JS).                |
+| **Game 3: Chemistry**      | Quiz adventure with simulated scenarios               | Described in `README.md`          | No game files exist yet (HTML/CSS/JS).                |
+| **Shared game shell**      | Common start/HUD/game-over flow for all games         | Implied in `README.md` tech stack | No shared shell, styling, or asset structure defined. |
+| **Hosting & distribution** | Static web hosting, no install required               | Not specified in `README.md`      | No hosting target, build, or release process defined. |
 
 ---
 
