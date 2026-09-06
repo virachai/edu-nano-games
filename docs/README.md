@@ -17,6 +17,7 @@ Welcome to the **nano-games** documentation repository. This structure is govern
 | `07-product-roadmap/`     | Phased delivery milestones, MVP scope definitions, feature backlogs, and long-term release plans.                   |
 | `08-analysis-gap/`        | Gap analysis between the documented vision and the current repository state.                                        |
 | `09-runbook/`             | Operational runbooks for building, releasing, and deploying the games.                                              |
+| `10-development-plan/`   | The master development plan: architecture decisions, phased roadmap, and cross-cutting requirements.                |
 
 ---
 

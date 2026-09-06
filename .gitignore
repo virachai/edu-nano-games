@@ -52,3 +52,6 @@ app.jsonl
 
 # VS Code
 .vscode/
+
+# Claude Code personal instructions (not shared)
+CLAUDE.local.md
