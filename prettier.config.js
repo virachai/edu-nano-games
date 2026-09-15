@@ -10,8 +10,8 @@ export default {
     {
       files: "*.json",
       options: {
-        printWidth: 120
-      }
-    }
-  ]
+        printWidth: 120,
+      },
+    },
+  ],
 };
