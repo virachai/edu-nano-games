@@ -30,7 +30,7 @@ jobs:
       - name: Lint
         run: pnpm exec eslint .
       - name: Type check
-        run: pnpm exec tsc --noEmit -b tsconfig.json
+        run: pnpm exec tsc -b
       - name: Tests
         run: pnpm test
 

@@ -4,5 +4,6 @@
     "rootDir": ".",
     "outDir": "../shared"
   },
-  "include": ["*.ts"]
+  "include": ["*.ts"],
+  "exclude": []
 }

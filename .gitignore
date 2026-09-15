@@ -16,6 +16,22 @@ build
 # other
 dist/
 
+# tsc build output — sources are .ts (tests/*.js are hand-written, not ignored)
+shared/*.js
+shared/*.js.map
+shared/*.d.ts
+shared/*.d.ts.map
+shared/*.tsbuildinfo
+games/*/*.js
+games/*/*.js.map
+games/*/*.d.ts
+games/*/*.d.ts.map
+games/*/*.tsbuildinfo
+games/*/data/*.js
+games/*/data/*.js.map
+games/*/data/*.d.ts
+games/*/data/*.d.ts.map
+
 # misc
 .DS_Store
 *.pem
