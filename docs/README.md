@@ -19,22 +19,20 @@ That means the games stay minimal, while the project around them gets enough str
 
 ## 🏷️ File Naming Convention (`NN-{aa-bb-cc}.md`)
 
-
-
 ## 📂 Directory Structure & Responsibilities
 
-| Directory                 | Scope & Primary Purpose                                                                                          |
-| :------------------------ | :--------------------------------------------------------------------------------------------------------------- |
-| `01-product-vision/`      | Product requirements, executive summaries, target personas, and core value propositions.                         |
-| `02-rfc-tech-spec/`       | Technical RFCs (Request for Comments), architectural decision records (ADRs), and deep technical specifications. |
-| `03-system-architecture/` | High-level system design, data flow diagrams, and component interactions for the game collection.                |
-| `04-api-integration/`     | API contracts and third-party service integrations (leaderboards, analytics, content backends).                  |
-| `05-ops-deployment/`      | DevOps procedures, CI/CD pipelines, static hosting setup, and scaling strategies.                                |
-| `06-security-compliance/` | Security audits, child-privacy policies, content-safety guidelines, and dependency hygiene.                      |
-| `07-product-roadmap/`     | Phased delivery milestones, MVP scope definitions, feature backlogs, and long-term release plans.                |
-| `08-analysis-gap/`        | Gap analysis between the documented vision and the current repository state.                                     |
-| `09-runbook/`             | Operational runbooks for building, releasing, and deploying the games.                                           |
-| `10-development-plan/`    | The master development plan: architecture decisions, phased roadmap, and cross-cutting requirements.             |
+| Directory                         | Scope & Primary Purpose                                                                                                 |
+| :-------------------------------- | :---------------------------------------------------------------------------------------------------------------------- |
+| `01-product-vision/`              | Product requirements, executive summaries, target personas, and core value propositions.                                |
+| `02-rfc-tech-spec/`               | Technical RFCs (Request for Comments), architectural decision records (ADRs), and deep technical specifications.        |
+| `03-system-architecture/`         | High-level system design, data flow diagrams, and component interactions for the game collection.                       |
+| `04-api-integration/`             | API contracts and third-party service integrations (leaderboards, analytics, content backends).                         |
+| `05-ops-deployment/`              | DevOps procedures, CI/CD pipelines, static hosting setup, and scaling strategies.                                       |
+| `06-security-compliance/`         | Security audits, child-privacy policies, content-safety guidelines, and dependency hygiene.                             |
+| `07-product-roadmap/`             | Phased delivery milestones, MVP scope definitions, feature backlogs, and long-term release plans.                       |
+| `08-analysis-gap/`                | Gap analysis between the documented vision and the current repository state.                                            |
+| `09-runbook/`                     | Operational runbooks for building, releasing, and deploying the games.                                                  |
+| `10-development-plan/`            | The master development plan: architecture decisions, phased roadmap, and cross-cutting requirements.                    |
 | `package.json` + `pnpm-lock.yaml` | Dev-only toolchain (TypeScript, ESLint, Prettier, Husky, lint-staged). Games themselves stay zero runtime dependencies. |
 
 ---
