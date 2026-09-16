@@ -1,13 +1,14 @@
-# Session Summary — 2026-09-16
+# Multi-Agent Workflow (2026-09-16)
 
 ## Purpose
+
 Capture the working agreement and architecture discussed in this session for using GPT-5.6 Luna together with local AI agents in the `edu-nano-games` workspace.
 
 ## Core Working Model
 
 The intended workflow is:
 
-```text
+```textplain
 Human / Product Direction
         ↓
 GPT-5.6 Luna
@@ -33,6 +34,7 @@ The goal is to make the workspace documents the contract between the planning/re
 ## Role Separation
 
 ### GPT-5.6 Luna
+
 - Analyze requirements and project state.
 - Design architecture and execution plans.
 - Break milestones into executable tasks.
@@ -42,6 +44,7 @@ The goal is to make the workspace documents the contract between the planning/re
 - Generate follow-up/fix tasks when verification fails.
 
 ### Local Agents
+
 - Read the workspace documentation before acting.
 - Execute READY tasks.
 - Modify source files and artifacts within documented constraints.
@@ -50,11 +53,13 @@ The goal is to make the workspace documents the contract between the planning/re
 - Do not declare work complete merely because code compiles.
 
 ### Human
+
 - Own product direction and final decisions.
 - Approve architectural or scope changes when needed.
 - Run local agents and provide/review results as appropriate.
 
 ### Source of Truth
+
 Repository files and explicit project evidence take precedence over model assumptions or conversation memory.
 
 ## Existing Milestone Pattern
@@ -94,10 +99,13 @@ docs/
 ```
 
 ### BACKLOG.md
+
 Should contain actionable task state, dependencies, priorities, and readiness rather than vague TODOs.
 
 ### tasks/*.md
+
 Each task should be an executable contract containing at least:
+
 - Objective
 - Agent instructions
 - Required files/context
@@ -108,7 +116,9 @@ Each task should be an executable contract containing at least:
 - Required completion evidence
 
 ### AGENT_RULES.md
+
 Should define common execution rules for all local agents, including:
+
 - Read relevant docs before modifying code.
 - Preserve documented interfaces/contracts.
 - Do not silently expand scope.
@@ -117,7 +127,9 @@ Should define common execution rules for all local agents, including:
 - Distinguish IMPLEMENTED from VERIFIED/DONE.
 
 ### evidence/*.md
+
 Should preserve concrete proof of completion, such as:
+
 - Commands executed
 - Test results
 - Render results
