@@ -1,11 +1,61 @@
 {
   "schemaVersion": "1.0",
-  "benchmark": "kaprekar-6174",
-  "fps": 30,
-  "stepFrames": 24,
-  "durationInFrames": 240,
-  "sceneCount": 10,
-  "terminalValue": 6174,
-  "values": ["3524", "3524", "3524", "3087", "3087", "3087", "8352", "8352", "8352", "6174"],
-  "phases": ["initial", "sort-descending", "sort-ascending", "subtract", "sort-descending", "sort-ascending", "subtract", "sort-descending", "sort-ascending", "subtract"]
+  "id": "kaprekar-6174",
+  "title": "Kaprekar's Constant",
+  "domain": "number",
+  "description": "Repeatedly sort four digits in opposite directions and subtract until 6174.",
+  "initialState": { "value": 3524 },
+  "entities": [
+    { "id": "digits", "type": "digit-sequence", "role": "input" },
+    { "id": "result", "type": "number", "role": "derived-output" }
+  ],
+  "operations": [
+    {
+      "id": "sort-descending",
+      "operation": "number/sort",
+      "target": "digits",
+      "parameters": { "direction": "descending" },
+      "expect": {
+        "preserves": ["element-values", "element-count"],
+        "changes": ["ordering"]
+      },
+      "visual": { "suggest": ["compare", "swap", "move", "settle"] }
+    },
+    {
+      "id": "sort-ascending",
+      "operation": "number/sort",
+      "target": "digits",
+      "parameters": { "direction": "ascending" },
+      "expect": {
+        "preserves": ["element-values", "element-count"],
+        "changes": ["ordering"]
+      },
+      "visual": { "suggest": ["compare", "swap", "move", "settle"] }
+    },
+    {
+      "id": "subtract",
+      "operation": "number/subtract",
+      "target": "digits",
+      "expect": { "changes": ["numeric-value"] },
+      "visual": { "suggest": ["align", "subtract", "reveal"] }
+    }
+  ],
+  "checkpoints": [
+    {
+      "id": "initial",
+      "condition": { "field": "value", "equals": "$initialState.value" }
+    },
+    {
+      "id": "fixed-point",
+      "condition": { "field": "value", "equals": 6174 }
+    }
+  ],
+  "validation": {
+    "terminal": { "field": "value", "equals": 6174 },
+    "maxIterations": 8
+  },
+  "metadata": {
+    "authoringMode": "canonical",
+    "deterministic": true
+  }
 }

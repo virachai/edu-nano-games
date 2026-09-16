@@ -109,3 +109,4 @@ export function validateRemotionScenes(compilation) {
   if (!compilation?.terminalState || typeof compilation.terminalState !== 'object') errors.push('Compilation is missing terminal semantic state.');
   return errors;
 }
+

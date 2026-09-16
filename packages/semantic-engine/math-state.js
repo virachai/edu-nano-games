@@ -14,7 +14,13 @@ export function createInitialState(value) {
 
 function sortDigits(state, direction) {
   const ordered = [...state.digits].sort((a, b) => direction === 'descending' ? b.value - a.value : a.value - b.value);
-  return { ...state, digits: ordered.map((digit, position) => ({ ...digit, position })) };
+  const text = ordered.map(digit => digit.value).join('');
+  return {
+    ...state,
+    value: Number(text),
+    text,
+    digits: ordered.map((digit, position) => ({ ...digit, position })),
+  };
 }
 
 function subtractState(state) {
@@ -82,5 +88,7 @@ export function validateState(state) {
   if (!/^\d{4}$/.test(state.text)) errors.push('State text must contain exactly four digits.');
   if (!Array.isArray(state.digits) || state.digits.length !== 4) errors.push('State must contain four digit entities.');
   if (state.digits.some(d => !Number.isInteger(d.value) || d.value < 0 || d.value > 9)) errors.push('Every digit entity must contain an integer from 0 to 9.');
+  if (Number(state.text) !== state.value) errors.push('State value must equal the numeric value of state text.');
+  if (state.digits.map(d => d.value).join('') !== state.text) errors.push('State digits must match state text in order.');
   return errors;
 }
