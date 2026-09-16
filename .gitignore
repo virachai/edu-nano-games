@@ -71,3 +71,6 @@ app.jsonl
 
 # Claude Code personal instructions (not shared)
 CLAUDE.local.md
+
+.serena/
+ref-01/

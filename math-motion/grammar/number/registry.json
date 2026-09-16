@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "1.0",
+  "family": "number",
+  "grammars": [
+    "duplicate",
+    "mirror",
+    "reverse",
+    "split",
+    "merge",
+    "collapse",
+    "expand",
+    "converge",
+    "rotate"
+  ],
+  "principle": "Concepts select reusable visual grammar; concepts do not own bespoke animation implementations."
+}

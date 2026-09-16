@@ -1,0 +1,17 @@
+{
+  "id": "kaprekar-6174",
+  "category": "number-pattern",
+  "difficulty": "easy",
+  "hook": "Almost every valid 4-digit number ends here.",
+  "mathematics": {
+    "operation": "kaprekar-routine",
+    "target": 6174,
+    "input": {
+      "digits": 4,
+      "requiresAtLeastTwoDistinctDigits": true
+    }
+  },
+  "visual": {
+    "grammar": "number/converge"
+  }
+}

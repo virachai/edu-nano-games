@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "1.0",
+  "benchmark": "kaprekar-6174",
+  "fps": 30,
+  "stepFrames": 24,
+  "durationInFrames": 240,
+  "sceneCount": 10,
+  "terminalValue": 6174,
+  "values": ["3524", "3524", "3524", "3087", "3087", "3087", "8352", "8352", "8352", "6174"],
+  "phases": ["initial", "sort-descending", "sort-ascending", "subtract", "sort-descending", "sort-ascending", "subtract", "sort-descending", "sort-ascending", "subtract"]
+}
