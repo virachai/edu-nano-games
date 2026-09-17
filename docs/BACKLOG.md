@@ -243,7 +243,7 @@ The exact current state of each task must be kept in the active task records rat
 | MM-001.3 | DONE | P0 | MM-001.2 | `tasks/MM-001.3.md` | Canonical Recipe | — | — |
 | MM-001.4 | DONE | P0 | MM-001.3 | `tasks/MM-001.4.md` | Remotion Compilation | — | — |
 | MM-001.5 | DONE | P0 | MM-001.4 | `tasks/MM-001.5.md` | Real Render; verified real Remotion render artifact produced | — | `12-evidence/MM-001.5.md` |
-| MM-001.6 | READY | P0 | MM-001.5 | `tasks/MM-001.6.md` | Release Evidence; unblocked by successful MM-001.5 render | — | `12-evidence/MM-001.6.md` |
+| MM-001.6 | DONE | P0 | MM-001.5 | `tasks/MM-001.6.md` | Release Evidence; assembled durable release evidence and DoD sign-off | — | `12-evidence/MM-001.6.md` |
 
 ## 15. Protocol Extension
 

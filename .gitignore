@@ -74,3 +74,7 @@ CLAUDE.local.md
 
 .serena/
 ref-01/
+
+# Math Motion render outputs and compilation artifacts
+math-motion/renders/*.mp4
+math-motion/renders/*.json
