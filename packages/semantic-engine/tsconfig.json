@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "../../dist/packages/semantic-engine",
+    "noEmit": true
+  },
+  "files": [
+    "compiler.js",
+    "contracts.js",
+    "index.js",
+    "math-state.js",
+    "recipe.js",
+    "remotion-compiler.js",
+    "state-primitives.js",
+    "transformation-library.js",
+    "validation.js"
+  ]
+}

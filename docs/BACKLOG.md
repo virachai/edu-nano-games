@@ -61,9 +61,9 @@ A task may be `READY` only when:
 
 Use one row per task in the active backlog table:
 
-| ID | Status | Priority | Depends On | Task Spec | Summary | Owner | Evidence |
-|---|---|---|---|---|---|---|---|
-| MM-001.1 | DONE | P0 | — | `tasks/MM-001.1.md` | Spec | — | `12-evidence/MM-001.1.md` |
+| ID       | Status | Priority | Depends On | Task Spec           | Summary | Owner | Evidence                  |
+| -------- | ------ | -------- | ---------- | ------------------- | ------- | ----- | ------------------------- |
+| MM-001.1 | DONE   | P0       | —          | `tasks/MM-001.1.md` | Spec    | —     | `12-evidence/MM-001.1.md` |
 
 ### Field rules
 
@@ -236,15 +236,16 @@ The exact current state of each task must be kept in the active task records rat
 
 > This section is the authoritative task table. States below are reconciled against the current repository state on 2026-09-17.
 
-| ID | Status | Priority | Depends On | Task Spec | Summary | Owner | Evidence |
-|---|---|---|---|---|---|---|---|
-| MM-001.1 | DONE | P0 | — | `tasks/MM-001.1.md` | Spec | — | — |
-| MM-001.2 | DONE | P0 | MM-001.1 | `tasks/MM-001.2.md` | Semantic Execution | — | — |
-| MM-001.3 | DONE | P0 | MM-001.2 | `tasks/MM-001.3.md` | Canonical Recipe | — | — |
-| MM-001.4 | DONE | P0 | MM-001.3 | `tasks/MM-001.4.md` | Remotion Compilation | — | — |
-| MM-001.5 | DONE | P0 | MM-001.4 | `tasks/MM-001.5.md` | Real Render; verified real Remotion render artifact produced | — | `12-evidence/MM-001.5.md` |
-| MM-001.6 | DONE | P0 | MM-001.5 | `tasks/MM-001.6.md` | Release Evidence; assembled durable release evidence and DoD sign-off | — | `12-evidence/MM-001.6.md` |
-| MM-001-R | READY | P0 | MM-001.6 | `tasks/MM-001-reconciliation.md` | Workspace reconciliation and MM-001 documentation cleanup before NEXT handoff | — | `12-evidence/MM-001-reconciliation.md` |
+| ID       | Status | Priority | Depends On | Task Spec                        | Summary                                                                       | Owner | Evidence                               |
+| -------- | ------ | -------- | ---------- | -------------------------------- | ----------------------------------------------------------------------------- | ----- | -------------------------------------- |
+| MM-001.1 | DONE   | P0       | —          | `tasks/MM-001.1.md`              | Spec                                                                          | —     | —                                      |
+| MM-001.2 | DONE   | P0       | MM-001.1   | `tasks/MM-001.2.md`              | Semantic Execution                                                            | —     | —                                      |
+| MM-001.3 | DONE   | P0       | MM-001.2   | `tasks/MM-001.3.md`              | Canonical Recipe                                                              | —     | —                                      |
+| MM-001.4 | DONE   | P0       | MM-001.3   | `tasks/MM-001.4.md`              | Remotion Compilation                                                          | —     | —                                      |
+| MM-001.5 | DONE   | P0       | MM-001.4   | `tasks/MM-001.5.md`              | Real Render; verified real Remotion render artifact produced                  | —     | `12-evidence/MM-001.5.md`              |
+| MM-001.6 | DONE   | P0       | MM-001.5   | `tasks/MM-001.6.md`              | Release Evidence; assembled durable release evidence and DoD sign-off         | —     | `12-evidence/MM-001.6.md`              |
+| MM-001-R | DONE   | P0       | MM-001.6   | `tasks/MM-001-reconciliation.md` | Workspace reconciliation and MM-001 documentation cleanup before NEXT handoff | —     | `12-evidence/MM-001-reconciliation.md` |
+| WS-001   | DONE   | P0       | MM-001-R   | `tasks/WS-001.md`                | Integrate packages/* into workspace build/typecheck/test gates                | —     | `12-evidence/WS-001.md`                |
 
 ## 15. Protocol Extension
 

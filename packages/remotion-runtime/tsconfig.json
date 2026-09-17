@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "../../dist/packages/remotion-runtime",
+    "jsx": "react-jsx",
+    "noEmit": true
+  },
+  "files": ["src/index.jsx", "src/Root.jsx", "src/SemanticComposition.jsx", "src/visual-primitives.jsx"]
+}

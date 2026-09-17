@@ -3,6 +3,8 @@
  * files); emitted build output and .ts sources (handled by tsc) are
  * ignored. Add typescript-eslint later if .ts rule coverage is wanted.
  */
+import globals from "globals";
+
 export default [
   {
     ignores: [
@@ -12,13 +14,16 @@ export default [
       "shared/*.d.ts",
       "games/**/*.js",
       "games/**/*.d.ts",
+      "dist/",
+      "packages/**/*.js",
     ],
   },
   {
     files: ["tests/**/*.js", "*.js"],
     languageOptions: {
-      ecmaVersion: 2023,
+      ecmaVersion: 2025,
       sourceType: "module",
+      globals: globals.node,
     },
     rules: {
       "no-undef": "error",

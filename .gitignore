@@ -78,3 +78,9 @@ ref-01/
 # Math Motion render outputs and compilation artifacts
 math-motion/renders/*.mp4
 math-motion/renders/*.json
+
+packages/semantic-engine/*.js
+packages/semantic-engine/*.js.map
+packages/semantic-engine/*.d.ts
+packages/semantic-engine/*.d.ts.map
+packages/*/tsconfig.tsbuildinfo
