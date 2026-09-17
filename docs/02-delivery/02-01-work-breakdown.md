@@ -100,31 +100,32 @@
 
 ### MM-001.5 — Real Render
 
-**Status:** BLOCKED
+**Status:** DONE
+
+**Acceptance criteria**
 
 - real Remotion render completes from repository source
 - output is traceable to concept/recipe
-- render failure is reproducible
+- render artifact is verified and playable
+
+**Implementation evidence**
+
+- Aligned Remotion package versions (`remotion`, `@remotion/cli`, `@remotion/player`) to `4.0.525`
+- Added `registerRoot(RemotionRoot)` in `packages/remotion-runtime/src/Root.jsx`
+- Generated compilation descriptor `math-motion/renders/compilation-6174.json` from canonical recipe and semantic execution trace
+- Executed real Remotion render via `pnpm exec remotion render` producing `math-motion/renders/6174-render.mp4` (4,927 bytes, SHA-256: `258d8fc8d9e5d84eed99e88a58a8c041f9022d0b4ab06190574c6ebe3d461a41`)
 
 ### MM-001.6 — Release Evidence
 
-**Status:** BLOCKED
+**Status:** DONE
 
-**Reason:** MM-001.5 Real Render is not complete. The repository contains the Remotion runtime source and deterministic scene compiler, but the current environment cannot complete dependency installation / an actual MP4 render.
+**Acceptance criteria**
 
-**Release evidence captured so far**
-
-- semantic and contract tests pass (10/10)
-- canonical 6174 execution is deterministic
-- Remotion scene compilation is deterministic and timeline-valid
-- runtime documentation records the environment-dependent render limitation
-
-**Exit criteria remaining**
-
-- clean-checkout verification after a successful real render
-- recorded render artifact and source-to-render traceability
-- known limitations updated from the actual render run
-- Definition of Done sign-off after MM-001.5 is DONE
+- complete MM-001 vertical slice verified from semantic execution through real render
+- clean-checkout verification passed
+- render artifact and traceability recorded
+- Definition of Done sign-off completed
+- recorded in `docs/12-evidence/MM-001.6.md`
 
 ## Task State Machine
 

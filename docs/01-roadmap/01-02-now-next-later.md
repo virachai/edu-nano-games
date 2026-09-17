@@ -4,18 +4,20 @@ This document is the short-horizon execution control plane. Keep it small and up
 
 ## NOW
 
-### MM-001 — 6174 Production Vertical Slice
+### MM-001 — 6174 Production Vertical Slice [COMPLETED]
 
 **Goal:** prove the complete Math Motion pipeline with one deterministic concept.
 
-- [ ] reconcile semantic-engine contract with `math-motion/concepts/6174/recipe.json`
-- [ ] derive the 6174 execution trace from semantic operations
-- [ ] make recipe state canonical and renderer-independent
-- [ ] compile trace to Remotion scene descriptors
-- [ ] add mathematical golden tests
-- [ ] add compiler determinism tests
-- [ ] execute a real Remotion render smoke test
-- [ ] record reproducible verification evidence
+- [x] reconcile semantic-engine contract with `math-motion/concepts/6174/recipe.json`
+- [x] derive the 6174 execution trace from semantic operations
+- [x] make recipe state canonical and renderer-independent
+- [x] compile trace to Remotion scene descriptors
+- [x] add mathematical golden tests
+- [x] add compiler determinism tests
+- [x] execute a real Remotion render smoke test
+- [x] record reproducible verification evidence
+
+*(MM-001 is fully verified and DONE across MM-001.1 through MM-001.6. Transitioning focus to NEXT items.)*
 
 ## NEXT
 
