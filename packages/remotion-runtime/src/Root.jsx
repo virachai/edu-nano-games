@@ -1,5 +1,5 @@
 import React from 'react';
-import { Composition } from 'remotion';
+import { Composition, registerRoot } from 'remotion';
 import { SemanticComposition } from './SemanticComposition.jsx';
 
 const fallbackCompilation = {
@@ -29,3 +29,6 @@ export function RemotionRoot() {
     />
   );
 }
+
+registerRoot(RemotionRoot);
+

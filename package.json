@@ -13,16 +13,21 @@
     "typecheck": "tsc -b"
   },
   "devDependencies": {
-    "typescript": "^7.0.2",
-    "husky": "^9.1.7",
-    "lint-staged": "^15.4.1",
-    "prettier": "^3.5.3",
     "@types/node": "^22.13.10",
     "eslint": "^9.32.0",
     "eslint-config-prettier": "^10.1.8",
-    "globals": "^16.4.0"
+    "globals": "^16.4.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.1",
+    "prettier": "^3.5.3",
+    "typescript": "^7.0.2"
   },
   "lint-staged": {
     "*": "prettier --ignore-unknown --write"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.525",
+    "@remotion/player": "4.0.525",
+    "remotion": "4.0.525"
   }
 }
