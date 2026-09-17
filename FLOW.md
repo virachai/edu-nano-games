@@ -88,4 +88,4 @@ flowchart LR
 
 ## Current Math Motion Gate
 
-`MM-001 — 6174 Production Vertical Slice` currently has `MM-001.1` through `MM-001.4` complete. `MM-001.5 Real Render` remains the render-verification gate, and `MM-001.6 Release Evidence` remains blocked until that gate is verified.
+`MM-001 — 6174 Production Vertical Slice` currently has `MM-001.1` through `MM-001.4` complete. `MM-001.5 Real Render` is currently blocked by environment/dependency availability, and `MM-001.6 Release Evidence` remains blocked until that gate is verified.

@@ -1,84 +1,89 @@
 # Evidence — <TASK-ID>
 
 **Task:** `<TASK-ID>`  
-**Status:** <VERIFIED | EVIDENCE_COMPLETE | DONE>  
+**Status:** <VERIFIED | EVIDENCE_COMPLETE | DONE | BLOCKED>  
 **Date:** YYYY-MM-DD  
-**Agent:** <agent identifier>
+**Agent:** <agent identifier>  
+**Reviewer:** DWB105 / pending
 
 ## Result
 
-State the verified outcome in a few concise sentences.
+State only the observed, verifiable outcome. Do not claim reviewer approval here.
 
 ## Changed Files
 
 List files actually changed by the task.
 
 - `<path>` — <what changed>
-- `<path>` — <what changed>
 
 ## Commands Executed
 
-Record the actual commands used for verification. Do not replace them with paraphrases.
+Record the exact commands actually executed.
 
 ```bash
 <command>
 ```
 
-## Verification
+## Verification Results
 
-| Check           | Result      | Notes             |
-| --------------- | ----------- | ----------------- |
-| <check/command> | PASS / FAIL | <relevant result> |
-| <check/command> | PASS / FAIL | <relevant result> |
+| Check | Expected | Actual | Result |
+| --- | --- | --- | --- |
+| <command/check> | <expected> | <observed> | PASS / FAIL |
 
-## Acceptance Criteria
+## Acceptance Criteria Evidence
 
-Map each acceptance criterion from the task specification to concrete evidence.
+Map every criterion from the task specification to concrete evidence.
 
-- [x] Criterion 1 — <evidence/reference>
-- [x] Criterion 2 — <evidence/reference>
-- [ ] Criterion 3 — <not satisfied / explanation>
+- [ ] Criterion 1 — <path/output/result>
+- [ ] Criterion 2 — <path/output/result>
 
 If any required criterion is not satisfied, the task must not be represented as `DONE`.
 
 ## Artifacts
 
-List generated or relevant artifacts and their repository paths.
+List generated or runtime artifacts and repository paths.
 
 - `<path>` — <artifact description>
 
-## Render / Runtime Evidence
+## Runtime / Render Evidence
 
-Use this section when the task produces a runtime result, render, media artifact, or other observable output.
+Use when the task produces an observable runtime, media, or rendered result.
 
 - Artifact: `<path>`
 - Runtime/check: `<command or procedure>`
-- Result: <observed result>
+- Observed result: ...
 
 ## Known Limitations / Risks
-
-Record known issues that remain after verification.
 
 - None / ...
 
 ## Reproduction
 
-Provide the minimum steps another agent or reviewer can use to reproduce the verification.
+Minimum steps another agent or reviewer can use to reproduce the verification.
 
 1. ...
 2. ...
-3. ...
+
+## Blocker Record
+
+If blocked, record:
+
+- Blocking command/step: ...
+- Exact error or observed condition: ...
+- Cause classification: task / existing issue / environment / dependency / external service
+- Why it cannot be resolved within this task: ...
 
 ## Reviewer Notes
 
-Optional reviewer observations. Keep this separate from agent-generated evidence.
+Reserved for DWB105. The execution agent must not fabricate this section.
 
 ## Final Assessment
 
-Choose exactly one:
+This section is completed by the reviewer/gatekeeper.
 
-- `VERIFIED` — acceptance checks pass, but evidence may still need final assembly.
-- `EVIDENCE_COMPLETE` — required evidence is complete and reviewable.
-- `DONE` — implementation, verification, and evidence requirements are all satisfied.
+- `VERIFIED` — acceptance checks pass.
+- `EVIDENCE_COMPLETE` — required proof is complete and reviewable.
+- `DONE` — reviewer accepts the implementation, verification, and evidence.
+- `BLOCKED` — completion cannot proceed because of an unresolved blocker.
 
-**Assessment:** `<VERIFIED | EVIDENCE_COMPLETE | DONE>`
+**Assessment:** `<VERIFIED | EVIDENCE_COMPLETE | DONE | BLOCKED>`

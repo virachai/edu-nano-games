@@ -79,7 +79,7 @@ The first Math Motion vertical slice is `MM-001 — 6174 Production Vertical Sli
 - `MM-001.2` Semantic Execution — **DONE**
 - `MM-001.3` Canonical Recipe — **DONE**
 - `MM-001.4` Remotion Compilation — **DONE**
-- `MM-001.5` Real Render — **pending verification**
+- `MM-001.5` Real Render — **BLOCKED: environment/dependency verification pending**
 - `MM-001.6` Release Evidence — **BLOCKED until MM-001.5 is verified**
 
 See [`docs/02-delivery/02-01-work-breakdown.md`](docs/02-delivery/02-01-work-breakdown.md) for the authoritative task state.
