@@ -14,15 +14,15 @@
 
 ## Acceptance Review
 
-| Criterion | Evidence | Result |
-| --- | --- | --- |
+| Criterion   | Evidence              | Result      |
+| ----------- | --------------------- | ----------- |
 | <criterion> | <path/command/output> | PASS / FAIL |
 
 ## Verification Review
 
-| Check | Claimed Result | Reviewer Result | Notes |
-| --- | --- | --- | --- |
-| <command/check> | PASS / FAIL | PASS / FAIL | ... |
+| Check           | Claimed Result | Reviewer Result | Notes |
+| --------------- | -------------- | --------------- | ----- |
+| <command/check> | PASS / FAIL    | PASS / FAIL     | ...   |
 
 ## Scope Review
 

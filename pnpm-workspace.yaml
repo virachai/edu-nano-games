@@ -1,6 +1,6 @@
 packages:
-  - 'games/*'
-  - 'shared'
-  - 'packages/*'
+  - "games/*"
+  - "shared"
+  - "packages/*"
 allowBuilds:
   esbuild: true

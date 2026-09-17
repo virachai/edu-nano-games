@@ -7,6 +7,7 @@
 ## Start
 
 อ่าน:
+
 1. `docs/AGENT_LOOP_RUNBOOK.md`
 2. `docs/AGENT_RUNBOOK.md`
 3. `docs/AGENT_RULES.md`
@@ -19,6 +20,7 @@
 ทำ **ทีละ 1 task ต่อ invocation เท่านั้น**
 
 สำหรับ task ที่เลือก:
+
 1. อ่าน `docs/tasks/<TASK-ID>.md`
 2. อ่าน context/evidence/spec ที่ task ระบุ
 3. ตรวจ dependencies
@@ -35,6 +37,7 @@
 ## Status Rules
 
 ห้าม:
+
 - execute `PLANNED`
 - execute `BLOCKED`
 - ข้าม dependency
@@ -63,18 +66,23 @@ STATUS: <IMPLEMENTED|VERIFIED|EVIDENCE_COMPLETE|BLOCKED>
 SUMMARY: <short summary>
 
 CHANGED:
+
 - <file>
 
 VERIFICATION:
+
 - <command> — PASS/FAIL
 
 EVIDENCE:
+
 - <evidence path>
 
 BLOCKERS:
+
 - <none or blocker>
 
 FOLLOW-UP:
+
 - <none or task-id>
 
 แล้วหยุด

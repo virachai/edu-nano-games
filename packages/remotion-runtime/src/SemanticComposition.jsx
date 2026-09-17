@@ -1,6 +1,6 @@
-import React from 'react';
-import { useCurrentFrame } from 'remotion';
-import { SceneTimeline, SemanticScene } from './visual-primitives.jsx';
+import React from "react";
+import { useCurrentFrame } from "remotion";
+import { SceneTimeline, SemanticScene } from "./visual-primitives.jsx";
 
 export function SemanticComposition({ compilation }) {
   const frame = useCurrentFrame();

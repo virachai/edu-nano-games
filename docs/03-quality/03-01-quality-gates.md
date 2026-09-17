@@ -60,14 +60,14 @@ Before release:
 
 ## Change Classification
 
-| Change | Required gates |
-| --- | --- |
-| Documentation only | 1, scope review |
-| Game logic | 1–3, plus relevant game acceptance tests |
-| Mathematical engine | 1–4 |
-| Compiler/recipe | 1–5 |
-| Renderer/render pipeline | 1–6 |
-| Production release | 1–7 |
+| Change                   | Required gates                           |
+| ------------------------ | ---------------------------------------- |
+| Documentation only       | 1, scope review                          |
+| Game logic               | 1–3, plus relevant game acceptance tests |
+| Mathematical engine      | 1–4                                      |
+| Compiler/recipe          | 1–5                                      |
+| Renderer/render pipeline | 1–6                                      |
+| Production release       | 1–7                                      |
 
 ## Principle
 

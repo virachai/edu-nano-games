@@ -17,7 +17,7 @@ This document is the short-horizon execution control plane. Keep it small and up
 - [x] execute a real Remotion render smoke test
 - [x] record reproducible verification evidence
 
-*(MM-001 is fully verified and DONE across MM-001.1 through MM-001.6. Transitioning focus to NEXT items.)*
+_(MM-001 is fully verified and DONE across MM-001.1 through MM-001.6. Transitioning focus to NEXT items.)_
 
 ## NEXT
 

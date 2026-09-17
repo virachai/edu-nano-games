@@ -1,6 +1,6 @@
-import React from 'react';
-import { Composition, registerRoot } from 'remotion';
-import { SemanticComposition } from './SemanticComposition.jsx';
+import React from "react";
+import { Composition, registerRoot } from "remotion";
+import { SemanticComposition } from "./SemanticComposition.jsx";
 
 const fallbackCompilation = {
   fps: 30,
@@ -31,4 +31,3 @@ export function RemotionRoot() {
 }
 
 registerRoot(RemotionRoot);
-

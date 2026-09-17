@@ -58,11 +58,11 @@ The agent should independently read:
 
 `scripts/agent-loop.sh` supports three important controls:
 
-| Control | Meaning |
-|---|---|
-| `--interval N` | Minutes to wait between completed agent cycles |
-| `--duration N` | Maximum wall-clock window for the loop |
-| `--start-delay N` | Minutes to wait before the first cycle |
+| Control           | Meaning                                        |
+| ----------------- | ---------------------------------------------- |
+| `--interval N`    | Minutes to wait between completed agent cycles |
+| `--duration N`    | Maximum wall-clock window for the loop         |
+| `--start-delay N` | Minutes to wait before the first cycle         |
 
 The loop is **bounded**. It exits when the duration window expires.
 

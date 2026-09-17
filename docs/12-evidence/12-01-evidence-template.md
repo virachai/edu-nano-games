@@ -26,8 +26,8 @@ Record the exact commands actually executed.
 
 ## Verification Results
 
-| Check | Expected | Actual | Result |
-| --- | --- | --- | --- |
+| Check           | Expected   | Actual     | Result      |
+| --------------- | ---------- | ---------- | ----------- |
 | <command/check> | <expected> | <observed> | PASS / FAIL |
 
 ## Acceptance Criteria Evidence

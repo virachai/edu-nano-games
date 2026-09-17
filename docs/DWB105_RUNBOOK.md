@@ -62,6 +62,7 @@ Local Agent ไม่มีสิทธิ์เปลี่ยน product goal,
 ตรวจ task spec, changed files, verification commands/results, evidence, acceptance criteria, scope compliance, regressions และ unresolved risks
 
 สถานะที่ใช้:
+
 - `VERIFIED` — implementation ผ่าน technical verification
 - `EVIDENCE_COMPLETE` — หลักฐานครบ
 - `DONE` — DWB105 ยอมรับผลลัพธ์แล้ว
@@ -78,6 +79,7 @@ Agent สามารถรายงาน IMPLEMENTED ได้ แต่ `DONE
 ## 8. Continuous Work
 
 เมื่อ Human บอกให้ทำ feature ต่อ:
+
 1. inspect current state
 2. หา existing READY task
 3. ตรวจว่ามี task ครอบคลุมเป้าหมายหรือไม่
