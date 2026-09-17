@@ -63,7 +63,7 @@ Use one row per task in the active backlog table:
 
 | ID | Status | Priority | Depends On | Task Spec | Summary | Owner | Evidence |
 |---|---|---|---|---|---|---|---|
-| MM-001.1 | DONE | P0 | — | `tasks/MM-001.1.md` | Spec | — | `evidence/MM-001.1.md` |
+| MM-001.1 | DONE | P0 | — | `tasks/MM-001.1.md` | Spec | — | `12-evidence/MM-001.1.md` |
 
 ### Field rules
 
@@ -234,16 +234,16 @@ The exact current state of each task must be kept in the active task records rat
 
 ## 14. Active Backlog
 
-> This section is intentionally the authoritative task table. Add or update rows as tasks are created.
+> This section is the authoritative task table. States below are reconciled against the current repository state on 2026-09-17.
 
 | ID | Status | Priority | Depends On | Task Spec | Summary | Owner | Evidence |
 |---|---|---|---|---|---|---|---|
-| MM-001.1 | DONE | P0 | — | `tasks/MM-001.1.md` | Spec | — | `evidence/MM-001.1.md` |
-| MM-001.2 | DONE | P0 | MM-001.1 | `tasks/MM-001.2.md` | Semantic Execution | — | `evidence/MM-001.2.md` |
-| MM-001.3 | DONE | P0 | MM-001.2 | `tasks/MM-001.3.md` | Canonical Recipe | — | `evidence/MM-001.3.md` |
-| MM-001.4 | DONE | P0 | MM-001.3 | `tasks/MM-001.4.md` | Remotion Compilation | — | `evidence/MM-001.4.md` |
-| MM-001.5 | DONE | P0 | MM-001.4 | `tasks/MM-001.5.md` | Real Render | — | `evidence/MM-001.5.md` |
-| MM-001.6 | DONE | P0 | MM-001.5 | `tasks/MM-001.6.md` | Release Evidence | — | `evidence/MM-001.6.md` |
+| MM-001.1 | DONE | P0 | — | `tasks/MM-001.1.md` | Spec | — | — |
+| MM-001.2 | DONE | P0 | MM-001.1 | `tasks/MM-001.2.md` | Semantic Execution | — | — |
+| MM-001.3 | DONE | P0 | MM-001.2 | `tasks/MM-001.3.md` | Canonical Recipe | — | — |
+| MM-001.4 | DONE | P0 | MM-001.3 | `tasks/MM-001.4.md` | Remotion Compilation | — | — |
+| MM-001.5 | BLOCKED | P0 | MM-001.4 | `tasks/MM-001.5.md` | Real Render; environment/render verification blocked by pnpm/esbuild build policies | — | `12-evidence/MM-001.5.md` |
+| MM-001.6 | BLOCKED | P0 | MM-001.5 | `tasks/MM-001.6.md` | Release Evidence; blocked until real render is DONE | — | `12-evidence/MM-001.6.md` |
 
 ## 15. Protocol Extension
 
