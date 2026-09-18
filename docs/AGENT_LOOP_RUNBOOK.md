@@ -54,7 +54,21 @@ The agent should independently read:
 4. `docs/context/<TASK-ID>-CONTEXT.md` when present
 5. required source/tests/artifacts
 
-## 3. Loop Controls
+## 3. Single-Cycle Runner
+
+Use `scripts/agent-runner.sh` when you want one real execution attempt. It provides repository-local locking, bounded execution time, and an operational log.
+
+```bash
+./scripts/agent-runner.sh
+```
+
+The default command is `gemini -m gemini-3.5-flash-lite -p '<repository protocol prompt>'`.
+
+Useful controls: `--timeout N`, `--model MODEL`, `--prompt TEXT`, `--log-dir PATH`, and `-- <command> [args...]` for a custom agent command.
+
+The runner does not select tasks, change lifecycle state, or approve work. The repository protocol remains authoritative.
+
+## 4. Loop Controls
 
 `scripts/agent-loop.sh` supports three important controls:
 
@@ -82,7 +96,7 @@ The loop is **bounded**. It exits when the duration window expires.
   'อ่าน docs/AGENT_LOOP_RUNBOOK.md และ docs/AGENT_RUNBOOK.md จากนั้นทำ READY task ตาม protocol โดยทำทีละ 1 task เท่านั้น ตรวจสอบ บันทึก evidence และ handoff แล้วหยุด'
 ```
 
-## 4. One Cycle Contract
+## 5. One Cycle Contract
 
 Each cycle is intended to perform at most one task:
 
@@ -112,7 +126,7 @@ NO EXECUTABLE TASK
 
 and return. The loop may invoke the agent again later, because DWB105 may have prepared new READY work during the window.
 
-## 5. Failure and Blockers
+## 6. Failure and Blockers
 
 If an agent cycle fails:
 
@@ -124,7 +138,7 @@ If an agent cycle fails:
 
 A non-zero agent exit code does **not** automatically mean the task is failed. Review the task evidence and repository state.
 
-## 6. Safety / Concurrency
+## 7. Safety / Concurrency
 
 The loop creates a repository-local lock under `.agent-runs/.lock`.
 
@@ -134,7 +148,7 @@ The loop also invokes the agent synchronously. It does **not** background an age
 
 Do not run multiple independent agent loops against the same workspace unless a future concurrency protocol explicitly supports task claiming/locking.
 
-## 7. Logs
+## 8. Logs
 
 Each loop creates:
 
@@ -144,7 +158,7 @@ Each loop creates:
 
 Logs are operational diagnostics. They are not task evidence and do not replace `docs/12-evidence/<TASK-ID>.md`.
 
-## 8. Reviewer Boundary
+## 9. Reviewer Boundary
 
 The loop can continue executing available work, but it cannot replace the review gate.
 
@@ -170,7 +184,7 @@ DONE
 
 DWB105 may create and prepare future tasks independently of whether the loop is currently running.
 
-## 9. Stop Conditions
+## 10. Stop Conditions
 
 Stop the loop when:
 
@@ -181,7 +195,7 @@ Stop the loop when:
 
 If the repository contains no READY work, the loop can safely remain idle between bounded cycles. It should not manufacture work to keep itself busy.
 
-## 10. Definition of Safe Automation
+## 11. Definition of Safe Automation
 
 The loop is considered safe when all of the following remain true:
 

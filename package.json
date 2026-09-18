@@ -7,6 +7,7 @@
   "scripts": {
     "build": "tsc -b",
     "test": "tsc -b && node --test tests/*.test.js",
+    "agent:self-check": "node scripts/agent-self-check.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint .",
