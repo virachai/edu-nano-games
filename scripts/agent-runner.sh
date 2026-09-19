@@ -86,14 +86,25 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR" || exit 1
 
 mkdir -p "$LOG_DIR" || fail "cannot create log directory: $LOG_DIR"
-command -v flock >/dev/null 2>&1 || fail "flock is required for runner concurrency control"
 command -v timeout >/dev/null 2>&1 || fail "timeout is required for the hard execution timeout"
 
-# flock is released by the kernel when this process exits, including SIGKILL.
-# This avoids stale lock directories after interrupted runs.
-exec 9>"$LOCK_FILE" || fail "cannot open lock: $LOCK_FILE"
-if ! flock -n 9; then
-  fail "another agent runner is already active (lock: $LOCK_FILE)"
+if command -v flock >/dev/null 2>&1; then
+  # flock is released by the kernel when this process exits, including SIGKILL.
+  # This avoids stale lock directories after interrupted runs.
+  exec 9>"$LOCK_FILE" || fail "cannot open lock: $LOCK_FILE"
+  if ! flock -n 9; then
+    fail "another agent runner is already active (lock: $LOCK_FILE)"
+  fi
+else
+  # Portable fallback when flock is unavailable (e.g. Git Bash on Windows)
+  LOCK_DIR="${LOCK_FILE}.d"
+  if ! mkdir "$LOCK_DIR" 2>/dev/null; then
+    fail "another agent runner is already active (lock: $LOCK_DIR)"
+  fi
+  cleanup() {
+    rmdir "$LOCK_DIR" 2>/dev/null || true
+  }
+  trap cleanup EXIT INT TERM
 fi
 
 RUN_ID="$(date '+%Y%m%d-%H%M%S')"

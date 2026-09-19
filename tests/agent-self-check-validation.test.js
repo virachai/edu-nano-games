@@ -126,6 +126,13 @@ test("self-check passes for the real repository task under validation (WS-004)",
   assert.match(result.stdout, /docs\/12-evidence\/WS-004\.md/);
 });
 
+test("self-check passes for the real repository task under validation (WS-005)", () => {
+  const result = runSelfCheck(["--root", REPO_ROOT, "WS-005"]);
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.match(result.stdout, /SELF-CHECK: PASS/);
+  assert.match(result.stdout, /docs\/12-evidence\/WS-005\.md/);
+});
+
 test("self-check passes in whole-backlog mode for the real repository", () => {
   const result = runSelfCheck(["--root", REPO_ROOT]);
   assert.equal(result.status, 0, result.stdout + result.stderr);
