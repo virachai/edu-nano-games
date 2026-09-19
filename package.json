@@ -6,7 +6,7 @@
   "description": "Lean, enterprise-grade educational mini-games (TypeScript/TS-emitted vanilla JS/HTML5, zero runtime dependencies for the games).",
   "scripts": {
     "build": "tsc -b",
-    "test": "tsc -b && node tests/storage.test.js && node tests/shell.test.js && node tests/audio.test.js && node tests/agent-protocol-validation.test.js && node tests/agent-state-transition-validation.test.js && node tests/math-motion-contract.test.js && node tests/math-motion-semantic-execution.test.js && node tests/agent-self-check-validation.test.js && node tests/agent-runner-validation.test.js && node tests/agent-loop-runner-validation.test.js && node tests/fraction-forge.test.js",
+    "test": "tsc -b && node tests/storage.test.js && node tests/shell.test.js && node tests/audio.test.js && node tests/agent-protocol-validation.test.js && node tests/agent-state-transition-validation.test.js && node tests/math-motion-contract.test.js && node tests/math-motion-semantic-execution.test.js && node tests/agent-self-check-validation.test.js && node tests/agent-runner-validation.test.js && node tests/agent-loop-runner-validation.test.js && node tests/fraction-forge.test.js && node tests/fraction-forge-session.test.js",
     "agent:self-check": "node scripts/agent-self-check.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check .",

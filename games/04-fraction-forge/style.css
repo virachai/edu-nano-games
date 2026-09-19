@@ -1,0 +1,22 @@
+/* Fraction Forge — v0.1 game-specific styles (layered on shared/styles.css) */
+
+.ff-prompt {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+}
+
+.ff-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.ff-feedback--correct {
+  color: var(--color-success);
+  font-weight: 700;
+}
+
+.ff-feedback--incorrect {
+  color: var(--color-danger);
+  font-weight: 700;
+}
