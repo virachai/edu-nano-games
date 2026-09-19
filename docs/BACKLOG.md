@@ -212,6 +212,8 @@ Recommended evidence structure:
 ## Notes / Risks
 ```
 
+| GAME-001.1 | READY | P1 | — | `tasks/GAME-001.1.md` | Fraction Forge v0.1 specification | Local Agent | `12-evidence/GAME-001.1.md` |
+
 ## 13. Current MM-001 Pipeline
 
 The current known milestone chain is:
