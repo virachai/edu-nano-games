@@ -1,13 +1,17 @@
 #!/usr/bin/env bash
 set -u
 
-# Document-driven local-agent loop.
+# Document-driven local-agent loop (scheduler layer).
 # Usage:
 #   ./scripts/agent-loop.sh --interval 10 --duration 120 -- gemini -m gemini-3.5-flash-lite -p '...'
 #
-# The script runs one synchronous agent invocation per cycle. The agent itself
-# discovers a READY task and follows docs/AGENT_RUNBOOK.md. The loop never
-# launches a second invocation while the previous one is still running.
+# The loop decides *when* a cycle starts. Each cycle delegates the actual agent
+# invocation to scripts/agent-runner.sh, which is the canonical single-cycle
+# execution primitive and owns per-run locking, the hard per-cycle timeout, and
+# the agent output log. The loop itself only schedules cycles, records cycle
+# boundaries plus the observed runner exit code, and keeps the invocations
+# strictly synchronous: a new cycle never starts before the previous runner has
+# returned.
 
 INTERVAL_MINUTES=10
 DURATION_MINUTES=120
@@ -21,12 +25,20 @@ Usage:
   agent-loop.sh [options] -- <agent-command> [args...]
 
 Options:
-  --interval MINUTES   Wait this many minutes between cycle starts (default: 10)
+  --interval MINUTES   Wait this many minutes between completed cycles (default: 10)
   --duration MINUTES   Stop after this total wall-clock window (default: 120)
   --start-delay MINUTES
                        Wait before the first cycle (default: 0)
-  --log-dir PATH       Directory for loop logs (default: .agent-runs)
+  --log-dir PATH       Directory for loop logs and runner run logs (default: .agent-runs)
   -h, --help           Show this help
+
+Each cycle runs:
+  bash scripts/agent-runner.sh --log-dir <log-dir> -- <agent-command> [args...]
+
+The runner owns the per-cycle lock, the hard per-cycle timeout (its own
+--timeout, default 30 minutes), and the agent output log (run-*.log). The loop
+log (loop-*.log) records cycle begin/end, sleep decisions, and the observed
+runner exit code.
 
 Examples:
   ./scripts/agent-loop.sh --interval 10 --duration 120 -- \
@@ -92,31 +104,53 @@ is_non_negative_integer "$START_DELAY_MINUTES" || fail "start-delay must be a no
 (( $# > 0 )) || fail "missing agent command"
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+RUNNER_SCRIPT="${ROOT_DIR}/scripts/agent-runner.sh"
 cd "$ROOT_DIR" || exit 1
+
+# The loop must not reimplement runner duties, so a missing runner is a hard
+# failure rather than a silent fallback to a direct agent invocation.
+[[ -f "$RUNNER_SCRIPT" ]] || fail "runner script not found: $RUNNER_SCRIPT"
 
 mkdir -p "$LOG_DIR"
 
-# Simple repository-local lock. It prevents accidentally running two loops
-# against the same workspace at the same time.
+# Loop-level lock (loop vs loop). It is deliberately separate from the runner's
+# own lock: this one keeps two loops from interleaving cycles in one workspace,
+# while the runner's lock keeps two agent invocations from overlapping.
 if ! mkdir "$LOCK_DIR" 2>/dev/null; then
   fail "another agent loop appears to be running (lock: $LOCK_DIR)"
 fi
-cleanup() {
-  rmdir "$LOCK_DIR" 2>/dev/null || true
-}
-trap cleanup EXIT INT TERM
 
 RUN_ID="$(date '+%Y%m%d-%H%M%S')"
 LOG_FILE="${LOG_DIR}/loop-${RUN_ID}.log"
 START_EPOCH="$(date +%s)"
 END_EPOCH=$((START_EPOCH + DURATION_MINUTES * 60))
 CYCLE=0
+FAILED_CYCLES=0
+LAST_RUNNER_EXIT_CODE=0
+STOP_REASON="window_expired"
+STOPPED=0
 
 log() {
   printf '[%s] %s\n' "$(date '+%Y-%m-%d %H:%M:%S %z')" "$*" | tee -a "$LOG_FILE"
 }
 
+finish() {
+  (( STOPPED == 1 )) && return 0
+  STOPPED=1
+  log "STOP run_id=${RUN_ID} cycles=${CYCLE} failed_cycles=${FAILED_CYCLES} last_runner_exit_code=${LAST_RUNNER_EXIT_CODE} reason=${STOP_REASON} log=${LOG_FILE}"
+  rmdir "$LOCK_DIR" 2>/dev/null || true
+}
+
+on_signal() {
+  STOP_REASON="signal"
+  exit 143
+}
+
+trap finish EXIT
+trap on_signal INT TERM
+
 log "START run_id=${RUN_ID} interval=${INTERVAL_MINUTES}m duration=${DURATION_MINUTES}m start_delay=${START_DELAY_MINUTES}m"
+log "RUNNER=${RUNNER_SCRIPT} log_dir=${LOG_DIR}"
 log "AGENT: $*"
 
 if (( START_DELAY_MINUTES > 0 )); then
@@ -135,15 +169,17 @@ while (( $(date +%s) < END_EPOCH )); do
 
   log "CYCLE ${CYCLE} BEGIN (remaining=${REMAINING}s)"
 
-  # Keep the agent invocation synchronous. This is intentional: no overlap,
-  # no uncontrolled concurrency, and each cycle starts only after the prior
-  # agent has returned.
-  set +e
-  "$@" 2>&1 | tee -a "$LOG_FILE"
-  AGENT_STATUS=${PIPESTATUS[0]}
-  set -e
+  # One synchronous runner invocation per cycle. The loop waits for the runner
+  # to return, so cycles cannot overlap. The runner's stdout/stderr stay
+  # attached to this process: the agent output is recorded in the runner's own
+  # run log, not duplicated into the loop log.
+  bash "$RUNNER_SCRIPT" --log-dir "$LOG_DIR" -- "$@"
+  LAST_RUNNER_EXIT_CODE=$?
+  if (( LAST_RUNNER_EXIT_CODE != 0 )); then
+    FAILED_CYCLES=$((FAILED_CYCLES + 1))
+  fi
 
-  log "CYCLE ${CYCLE} END exit_code=${AGENT_STATUS}"
+  log "CYCLE ${CYCLE} END runner_exit_code=${LAST_RUNNER_EXIT_CODE}"
 
   NOW="$(date +%s)"
   REMAINING=$((END_EPOCH - NOW))
@@ -160,4 +196,4 @@ while (( $(date +%s) < END_EPOCH )); do
   fi
 done
 
-log "STOP run_id=${RUN_ID} cycles=${CYCLE} reason=window_expired"
+finish

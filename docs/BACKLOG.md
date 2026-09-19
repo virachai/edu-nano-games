@@ -250,7 +250,7 @@ The exact current state of each task must be kept in the active task records rat
 | WS-003   | EVIDENCE_COMPLETE | P1       | —          | `tasks/WS-003.md`                | Validate agent state transition and evidence completion contract              | Local Agent | `12-evidence/WS-003.md`                |
 | WS-004   | DONE              | P1       | —          | `tasks/WS-004.md`                | Add executable self-validation gate before local-agent handoff                | Local Agent | `12-evidence/WS-004.md`                |
 | WS-005   | DONE              | P1       | WS-004     | `tasks/WS-005.md`                | End-to-end validation of the real local-agent runner and bounded protocol     | Local Agent | `12-evidence/WS-005.md`                |
-| WS-006   | READY             | P1       | WS-005     | `tasks/WS-006.md`                | Integrate the single-cycle runner as the bounded loop's execution primitive | Local Agent | `12-evidence/WS-006.md`                |
+| WS-006   | DONE              | P1       | WS-005     | `tasks/WS-006.md`                | Integrate the single-cycle runner as the bounded loop's execution primitive   | Local Agent | `12-evidence/WS-006.md`                |
 
 ## 15. Protocol Extension
 
