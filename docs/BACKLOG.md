@@ -212,8 +212,6 @@ Recommended evidence structure:
 ## Notes / Risks
 ```
 
-| GAME-001.1 | READY | P1 | — | `tasks/GAME-001.1.md` | Fraction Forge v0.1 specification | Local Agent | `12-evidence/GAME-001.1.md` |
-
 ## 13. Current MM-001 Pipeline
 
 The current known milestone chain is:
@@ -253,6 +251,7 @@ The exact current state of each task must be kept in the active task records rat
 | WS-004   | DONE              | P1       | —          | `tasks/WS-004.md`                | Add executable self-validation gate before local-agent handoff                | Local Agent | `12-evidence/WS-004.md`                |
 | WS-005   | DONE              | P1       | WS-004     | `tasks/WS-005.md`                | End-to-end validation of the real local-agent runner and bounded protocol     | Local Agent | `12-evidence/WS-005.md`                |
 | WS-006   | DONE              | P1       | WS-005     | `tasks/WS-006.md`                | Integrate the single-cycle runner as the bounded loop's execution primitive   | Local Agent | `12-evidence/WS-006.md`                |
+| GAME-001.1 | DONE              | P1       | —          | `tasks/GAME-001.1.md`            | Fraction Forge v0.1 specification                                            | Local Agent | `12-evidence/GAME-001.1.md`            |
 
 ## 15. Protocol Extension
 
