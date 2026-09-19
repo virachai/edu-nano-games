@@ -37,12 +37,6 @@
       "skillPath": "skills/extension-dev/SKILL.md",
       "computedHash": "6835942f8d40619027a3ce08ed9beaad4faa5653fecb1c78303bd5a6a2edea34"
     },
-    "git-commit": {
-      "source": "github/awesome-copilot",
-      "sourceType": "github",
-      "skillPath": "skills/git-commit/SKILL.md",
-      "computedHash": "2607fc60629b82b257136dd2a7a373f0a4466c0b49df7746d845d59313c99b21"
-    },
     "git-guardrails-claude-code": {
       "source": "mattpocock/skills",
       "sourceType": "github",
