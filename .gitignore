@@ -86,3 +86,5 @@ packages/semantic-engine/*.d.ts
 packages/semantic-engine/*.d.ts.map
 packages/*/tsconfig.tsbuildinfo
 request.json
+# Agent action logs
+logs/*.jsonl
