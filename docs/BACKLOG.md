@@ -254,6 +254,7 @@ The exact current state of each task must be kept in the active task records rat
 | GAME-001.1 | DONE              | P1       | —          | `tasks/GAME-001.1.md`            | Fraction Forge v0.1 specification                                            | Local Agent | `12-evidence/GAME-001.1.md`            |
 | GAME-001.2 | DONE              | P1       | GAME-001.1 | `tasks/GAME-001.2.md`            | Fraction Forge semantic question model and answer validation                 | Local Agent | `12-evidence/GAME-001.2.md`            |
 | GAME-001.3 | DONE   | P1       | GAME-001.2 | `tasks/GAME-001.3.md`            | Fraction Forge browser UI for v0.1 gameplay                                  | Local Agent | `12-evidence/GAME-001.3.md`            |
+| GAME-001.4 | DONE              | P1       | GAME-001.3 | `tasks/GAME-001.4.md`            | Fraction Forge game feel and visual polish                         | Local Agent | `12-evidence/GAME-001.4.md`            |
 
 ## 15. Protocol Extension
 

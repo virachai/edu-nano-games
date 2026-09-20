@@ -1,22 +1,152 @@
-/* Fraction Forge — v0.1 game-specific styles (layered on shared/styles.css) */
+/* Fraction Forge — game-specific polished styles (layered on shared/styles.css) */
+
+.ff-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 36rem;
+  margin: 0 auto;
+  padding: var(--space-4);
+}
+
+.ff-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.ff-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-3);
+}
+
+.ff-title {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-accent);
+  margin: 0;
+}
 
 .ff-prompt {
   font-size: var(--font-size-lg);
   font-weight: 600;
+  color: var(--color-text);
+  margin: 0;
+  text-align: center;
+  padding: var(--space-2) 0;
 }
 
 .ff-choices {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-3);
 }
 
-.ff-feedback--correct {
-  color: var(--color-success);
-  font-weight: 700;
+@media (max-width: 480px) {
+  .ff-choices {
+    grid-template-columns: 1fr;
+  }
 }
 
-.ff-feedback--incorrect {
-  color: var(--color-danger);
+.ff-choice-btn {
+  min-height: 52px;
+  font-size: var(--font-size-lg);
   font-weight: 700;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ff-choice-btn:hover:not(:disabled) {
+  border-color: var(--color-accent);
+  background: rgba(29, 78, 216, 0.04);
+  transform: translateY(-1px);
+}
+
+.ff-choice-btn:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.ff-choice-btn:disabled {
+  cursor: default;
+  opacity: 0.85;
+}
+
+/* Answer state feedback styling */
+.ff-choice-btn.is-correct {
+  background: #ecfdf5;
+  border-color: var(--color-success);
+  color: var(--color-success);
+}
+
+.ff-choice-btn.is-incorrect {
+  background: #fef2f2;
+  border-color: var(--color-danger);
+  color: var(--color-danger);
+}
+
+.ff-choice-btn.is-selected {
+  box-shadow: 0 0 0 2px var(--color-accent);
+}
+
+.ff-feedback-banner {
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  text-align: center;
+  font-weight: 600;
+  min-height: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ff-feedback-banner.ff-feedback--correct {
+  background: #ecfdf5;
+  color: var(--color-success);
+  border: 1px solid #a7f3d0;
+}
+
+.ff-feedback-banner.ff-feedback--incorrect {
+  background: #fef2f2;
+  color: var(--color-danger);
+  border: 1px solid #fecaca;
+}
+
+.ff-next-btn {
+  width: 100%;
+  min-height: 48px;
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: filter var(--transition-fast);
+}
+
+.ff-next-btn:hover {
+  filter: brightness(1.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
 }
