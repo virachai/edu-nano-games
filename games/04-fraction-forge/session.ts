@@ -14,6 +14,7 @@ import {
 export interface Session {
   readonly bank: readonly FractionQuestion[];
   readonly index: number;
+  readonly previousIndex: number;
   readonly question: FractionQuestion;
   readonly score: number;
   readonly lastResult: AnswerResult | null;
@@ -27,6 +28,7 @@ export function createSession(bank: readonly FractionQuestion[]): Session {
   return {
     bank,
     index: 0,
+    previousIndex: -1,
     question: bank[0],
     score: 0,
     lastResult: null,
@@ -47,13 +49,23 @@ export function submitAnswer(session: Session, submitted: Fraction): Session {
   };
 }
 
-/** Advances to the next question, cycling back to the start of the bank. */
-export function advanceSession(session: Session): Session {
-  const index = (session.index + 1) % session.bank.length;
+/** Advances to the next question, using an injectable randomizer to select a different question. */
+export function advanceSession(session: Session, randomizer: () => number = Math.random): Session {
+  let newIndex = session.index;
+  if (session.bank.length > 1) {
+    // With only two questions, the previous index and the only valid
+    // alternative can coincide, so previousIndex exclusion is only
+    // enforceable (without looping forever) when a third option exists.
+    const excludePrevious = session.bank.length > 2;
+    do {
+      newIndex = Math.floor(randomizer() * session.bank.length);
+    } while (newIndex === session.index || (excludePrevious && newIndex === session.previousIndex));
+  }
   return {
     ...session,
-    index,
-    question: session.bank[index],
+    index: newIndex,
+    previousIndex: session.index,
+    question: session.bank[newIndex],
     lastResult: null,
   };
 }
