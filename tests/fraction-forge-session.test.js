@@ -52,6 +52,22 @@ test("submitAnswer: incorrect choice leaves score unchanged and records the resu
   assert.equal(next.lastResult.outcome, "incorrect");
 });
 
+test("submitAnswer: records the exact submitted choice as lastSubmitted", () => {
+  const session = createSession(bank);
+  const submitted = { numerator: 1, denominator: 4 };
+  const next = submitAnswer(session, submitted);
+  assert.deepEqual(next.lastSubmitted, submitted);
+});
+
+test("createSession and advanceSession: lastSubmitted starts and resets to null", () => {
+  const session = createSession(bank);
+  assert.equal(session.lastSubmitted, null);
+  const answered = submitAnswer(session, { numerator: 2, denominator: 4 });
+  assert.notEqual(answered.lastSubmitted, null);
+  const next = advanceSession(answered, () => 0.5);
+  assert.equal(next.lastSubmitted, null);
+});
+
 test("submitAnswer: does not mutate the original session", () => {
   const session = createSession(bank);
   submitAnswer(session, { numerator: 2, denominator: 4 });

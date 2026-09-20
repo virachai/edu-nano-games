@@ -18,6 +18,10 @@ export interface Session {
   readonly question: FractionQuestion;
   readonly score: number;
   readonly lastResult: AnswerResult | null;
+  /** The exact choice the user submitted for lastResult, so the UI can
+   * distinguish the submitted wrong choice from the expected correct one.
+   * Not part of the GAME-001.2 semantic contract; UI-facing only. */
+  readonly lastSubmitted: Fraction | null;
 }
 
 /** Starts a session at the first question of a non-empty bank. */
@@ -32,6 +36,7 @@ export function createSession(bank: readonly FractionQuestion[]): Session {
     question: bank[0],
     score: 0,
     lastResult: null,
+    lastSubmitted: null,
   };
 }
 
@@ -46,6 +51,7 @@ export function submitAnswer(session: Session, submitted: Fraction): Session {
     ...session,
     score: session.score + result.scoreDelta,
     lastResult: result,
+    lastSubmitted: submitted,
   };
 }
 
@@ -67,5 +73,6 @@ export function advanceSession(session: Session, randomizer: () => number = Math
     previousIndex: session.index,
     question: session.bank[newIndex],
     lastResult: null,
+    lastSubmitted: null,
   };
 }

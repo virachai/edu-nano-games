@@ -60,18 +60,34 @@ export function mountFractionForge(container: HTMLElement): void {
   card.append(hud, prompt, choicesList, feedback, nextBtn);
   container.append(card);
 
+  let previousScore = session.score;
+
   function render(): void {
+    if (session.score !== previousScore) {
+      scoreValue.classList.remove("hud__value--pulse");
+      // Force reflow so the animation restarts on repeated score increases.
+      void scoreValue.offsetWidth;
+      scoreValue.classList.add("hud__value--pulse");
+      previousScore = session.score;
+    }
     scoreValue.textContent = String(session.score);
     prompt.textContent = `Convert ${questionLabel(session.question)} to a fraction over denominator ${session.question.targetDenominator}.`;
 
     choicesList.innerHTML = "";
     const answered = session.lastResult !== null;
     const lastResult = session.lastResult;
+    const lastSubmitted = session.lastSubmitted;
 
     for (const choice of session.question.choices) {
       const btn = el("button", "ff-choice-btn", fractionLabel(choice));
       btn.type = "button";
       btn.disabled = answered;
+      btn.setAttribute("aria-disabled", String(answered));
+
+      const wasSubmitted =
+        lastSubmitted !== null &&
+        choice.numerator === lastSubmitted.numerator &&
+        choice.denominator === lastSubmitted.denominator;
 
       if (answered && lastResult) {
         const isExpected =
@@ -80,15 +96,20 @@ export function mountFractionForge(container: HTMLElement): void {
 
         if (isExpected) {
           btn.classList.add("is-correct");
-        } else if (lastResult.outcome === "incorrect") {
-          // If the user clicked this choice and it was wrong, highlight it as incorrect
-          // (Note: session doesn't store the exact submitted choice object directly in lastResult, but we know expected != choice).
+        } else if (wasSubmitted) {
+          btn.classList.add("is-incorrect");
+        }
+
+        if (wasSubmitted) {
+          btn.classList.add("is-selected");
+          btn.setAttribute("aria-pressed", "true");
         }
       }
 
       btn.addEventListener("click", () => {
         session = submitAnswer(session, choice);
         render();
+        feedback.focus();
       });
       choicesList.append(btn);
     }
@@ -100,6 +121,7 @@ export function mountFractionForge(container: HTMLElement): void {
         : `Incorrect. The correct answer was ${fractionLabel(lastResult.expected)}.`;
       feedback.classList.toggle("ff-feedback--correct", isCorrect);
       feedback.classList.toggle("ff-feedback--incorrect", !isCorrect);
+      feedback.classList.add("is-visible");
       feedback.hidden = false;
     } else {
       feedback.textContent = "";
@@ -115,7 +137,11 @@ export function mountFractionForge(container: HTMLElement): void {
   nextBtn.addEventListener("click", () => {
     session = advanceSession(session);
     render();
+    const firstChoice = choicesList.querySelector<HTMLButtonElement>(".ff-choice-btn");
+    firstChoice?.focus();
   });
+
+  feedback.tabIndex = -1;
 
   render();
 }
