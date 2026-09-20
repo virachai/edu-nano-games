@@ -24,8 +24,35 @@ export interface Session {
   readonly lastSubmitted: Fraction | null;
 }
 
-/** Starts a session at the first question of a non-empty bank. */
-export function createSession(bank: readonly FractionQuestion[]): Session {
+/**
+ * Returns a new array containing the same choice values in a randomized
+ * order, via an injectable Fisher-Yates shuffle. Never mutates the input.
+ */
+export function shuffleChoices(
+  choices: readonly Fraction[],
+  randomizer: () => number = Math.random,
+): Fraction[] {
+  const result = [...choices];
+  for (let i = result.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(randomizer() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
+/** Returns a copy of the question with its choices in randomized order; the bank entry itself is never mutated. */
+function withShuffledChoices(
+  question: FractionQuestion,
+  randomizer: () => number,
+): FractionQuestion {
+  return { ...question, choices: shuffleChoices(question.choices, randomizer) };
+}
+
+/** Starts a session at the first question of a non-empty bank, with its choices shuffled. */
+export function createSession(
+  bank: readonly FractionQuestion[],
+  choiceRandomizer: () => number = Math.random,
+): Session {
   if (bank.length === 0) {
     throw new RangeError("bank must be non-empty");
   }
@@ -33,7 +60,7 @@ export function createSession(bank: readonly FractionQuestion[]): Session {
     bank,
     index: 0,
     previousIndex: -1,
-    question: bank[0],
+    question: withShuffledChoices(bank[0], choiceRandomizer),
     score: 0,
     lastResult: null,
     lastSubmitted: null,
@@ -55,8 +82,16 @@ export function submitAnswer(session: Session, submitted: Fraction): Session {
   };
 }
 
-/** Advances to the next question, using an injectable randomizer to select a different question. */
-export function advanceSession(session: Session, randomizer: () => number = Math.random): Session {
+/**
+ * Advances to the next question, using an injectable randomizer to select a
+ * different question and a separately injectable randomizer to shuffle that
+ * question's choice order.
+ */
+export function advanceSession(
+  session: Session,
+  randomizer: () => number = Math.random,
+  choiceRandomizer: () => number = Math.random,
+): Session {
   let newIndex = session.index;
   if (session.bank.length > 1) {
     // With only two questions, the previous index and the only valid
@@ -71,7 +106,7 @@ export function advanceSession(session: Session, randomizer: () => number = Math
     ...session,
     index: newIndex,
     previousIndex: session.index,
-    question: session.bank[newIndex],
+    question: withShuffledChoices(session.bank[newIndex], choiceRandomizer),
     lastResult: null,
     lastSubmitted: null,
   };
